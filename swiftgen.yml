@@ -1,0 +1,19 @@
+# 1
+input_dir: iWeather/
+# 2
+output_dir: iWeather/Generated/
+
+## XCAssets
+xcassets:
+  inputs:
+    - Resources/Assets.xcassets
+    - Resources/Colors.xcassets
+  outputs:
+    templateName: swift5
+    # 1
+    params:
+       # 2
+       forceProvidesNamespaces: true
+       # 3
+       forceFileNameEnum: true
+    output: XCAssets+Generated.swift
