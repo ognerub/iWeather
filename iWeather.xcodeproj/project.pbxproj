@@ -20,6 +20,16 @@
 		848C79E12B87767700DBDDA9 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 848C79E02B87767600DBDDA9 /* swiftgen.yml */; };
 		848C79E52B87783500DBDDA9 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848C79E42B87783500DBDDA9 /* Colors.xcassets */; };
 		848C79E72B8778F100DBDDA9 /* XCAssets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C79E62B8778F100DBDDA9 /* XCAssets+Generated.swift */; };
+		848C79E92B89FC6B00DBDDA9 /* CodableModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C79E82B89FC6B00DBDDA9 /* CodableModels.swift */; };
+		848C79ED2B89FD0300DBDDA9 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C79EC2B89FD0300DBDDA9 /* NetworkConstants.swift */; };
+		848C79EF2B89FDAF00DBDDA9 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C79EE2B89FDAF00DBDDA9 /* URLSession.swift */; };
+		848C79F12B89FDC800DBDDA9 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C79F02B89FDC800DBDDA9 /* URLRequest.swift */; };
+		848C79F32B89FDE900DBDDA9 /* ForcastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C79F22B89FDE900DBDDA9 /* ForcastService.swift */; };
+		848C79F52B89FE1300DBDDA9 /* NetwokErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C79F42B89FE1300DBDDA9 /* NetwokErrorModel.swift */; };
+		848C79F72B89FE7900DBDDA9 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C79F62B89FE7900DBDDA9 /* String+Extensions.swift */; };
+		848C79FB2B8A03DD00DBDDA9 /* UIBlockingProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C79FA2B8A03DD00DBDDA9 /* UIBlockingProgressHUD.swift */; };
+		848C79FD2B8A049800DBDDA9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C79FC2B8A049800DBDDA9 /* Alert.swift */; };
+		848C79FF2B8A04D000DBDDA9 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C79FE2B8A04D000DBDDA9 /* AlertModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +48,16 @@
 		848C79E02B87767600DBDDA9 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		848C79E42B87783500DBDDA9 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		848C79E62B8778F100DBDDA9 /* XCAssets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCAssets+Generated.swift"; sourceTree = "<group>"; };
+		848C79E82B89FC6B00DBDDA9 /* CodableModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableModels.swift; sourceTree = "<group>"; };
+		848C79EC2B89FD0300DBDDA9 /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
+		848C79EE2B89FDAF00DBDDA9 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
+		848C79F02B89FDC800DBDDA9 /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
+		848C79F22B89FDE900DBDDA9 /* ForcastService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForcastService.swift; sourceTree = "<group>"; };
+		848C79F42B89FE1300DBDDA9 /* NetwokErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetwokErrorModel.swift; sourceTree = "<group>"; };
+		848C79F62B89FE7900DBDDA9 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		848C79FA2B8A03DD00DBDDA9 /* UIBlockingProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBlockingProgressHUD.swift; sourceTree = "<group>"; };
+		848C79FC2B8A049800DBDDA9 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		848C79FE2B8A04D000DBDDA9 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
 		9BC117D352B8679A8DB572FC /* Pods_iWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE34C47EF4FD80D672820045 /* Pods-iWeather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWeather.release.xcconfig"; path = "Target Support Files/Pods-iWeather/Pods-iWeather.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,7 +107,11 @@
 			children = (
 				848C79BB2B864D4000DBDDA9 /* AppDelegate.swift */,
 				848C79BD2B864D4000DBDDA9 /* SceneDelegate.swift */,
+				848C79F82B89FEC200DBDDA9 /* Extensions */,
+				848C79EB2B89FCF100DBDDA9 /* Network */,
+				848C79EA2B89FCE500DBDDA9 /* Models */,
 				848C79D72B876B0600DBDDA9 /* Scenes */,
+				848C79F92B8A03C400DBDDA9 /* Helpers */,
 				848C79D82B876B1D00DBDDA9 /* Resources */,
 				848C79E32B87778A00DBDDA9 /* Generated */,
 				848C79C92B864D4500DBDDA9 /* Info.plist */,
@@ -123,6 +147,44 @@
 				848C79E62B8778F100DBDDA9 /* XCAssets+Generated.swift */,
 			);
 			path = Generated;
+			sourceTree = "<group>";
+		};
+		848C79EA2B89FCE500DBDDA9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				848C79E82B89FC6B00DBDDA9 /* CodableModels.swift */,
+				848C79F42B89FE1300DBDDA9 /* NetwokErrorModel.swift */,
+				848C79FE2B8A04D000DBDDA9 /* AlertModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		848C79EB2B89FCF100DBDDA9 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				848C79EC2B89FD0300DBDDA9 /* NetworkConstants.swift */,
+				848C79F22B89FDE900DBDDA9 /* ForcastService.swift */,
+				848C79F02B89FDC800DBDDA9 /* URLRequest.swift */,
+				848C79EE2B89FDAF00DBDDA9 /* URLSession.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		848C79F82B89FEC200DBDDA9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				848C79F62B89FE7900DBDDA9 /* String+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		848C79F92B8A03C400DBDDA9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				848C79FA2B8A03DD00DBDDA9 /* UIBlockingProgressHUD.swift */,
+				848C79FC2B8A049800DBDDA9 /* Alert.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		9475963CE8EAB0A1337D9EF9 /* Frameworks */ = {
@@ -252,11 +314,21 @@
 			files = (
 				848C79D22B864DFA00DBDDA9 /* SearchViewController.swift in Sources */,
 				848C79D42B864E4100DBDDA9 /* MapViewController.swift in Sources */,
+				848C79EF2B89FDAF00DBDDA9 /* URLSession.swift in Sources */,
+				848C79FD2B8A049800DBDDA9 /* Alert.swift in Sources */,
+				848C79FB2B8A03DD00DBDDA9 /* UIBlockingProgressHUD.swift in Sources */,
+				848C79F12B89FDC800DBDDA9 /* URLRequest.swift in Sources */,
+				848C79ED2B89FD0300DBDDA9 /* NetworkConstants.swift in Sources */,
 				848C79D62B864E6200DBDDA9 /* SettingsViewController.swift in Sources */,
+				848C79E92B89FC6B00DBDDA9 /* CodableModels.swift in Sources */,
+				848C79F32B89FDE900DBDDA9 /* ForcastService.swift in Sources */,
 				848C79E72B8778F100DBDDA9 /* XCAssets+Generated.swift in Sources */,
 				848C79C02B864D4000DBDDA9 /* MainViewController.swift in Sources */,
+				848C79F72B89FE7900DBDDA9 /* String+Extensions.swift in Sources */,
+				848C79F52B89FE1300DBDDA9 /* NetwokErrorModel.swift in Sources */,
 				848C79D02B864D9100DBDDA9 /* TabBarController.swift in Sources */,
 				848C79BC2B864D4000DBDDA9 /* AppDelegate.swift in Sources */,
+				848C79FF2B8A04D000DBDDA9 /* AlertModel.swift in Sources */,
 				848C79BE2B864D4000DBDDA9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

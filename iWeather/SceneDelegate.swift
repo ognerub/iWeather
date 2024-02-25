@@ -8,7 +8,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         let viewController = TabBarController()
         window.rootViewController = viewController
-        window.overrideUserInterfaceStyle = .dark
         self.window = window
         window.makeKeyAndVisible()
     }

@@ -2,23 +2,23 @@ import UIKit
 
 final class TabBarController: UITabBarController {
     private let mainTabBarItem = UITabBarItem(
-        title: "Main",
-        image: UIImage(systemName: "photo.on.rectangle.angled"),
+        title: "",
+        image: Asset.Assets.TabBarItems.iconsMain.image,
         tag: 0
     )
     private let searchTabBarItem = UITabBarItem(
-        title: "Search",
-        image: UIImage(systemName: "magnifyingglass"),
+        title: "",
+        image: Asset.Assets.TabBarItems.iconsSearch.image,
         tag: 1
     )
     private let mapTabBarItem = UITabBarItem(
-        title: "Map",
-        image: UIImage(systemName: "magnifyingglass"),
+        title: "",
+        image: Asset.Assets.TabBarItems.iconsMap.image,
         tag: 2
     )
     private let settingsTabBarItem = UITabBarItem(
-        title: "Settings",
-        image: UIImage(systemName: "magnifyingglass"),
+        title: "",
+        image: Asset.Assets.TabBarItems.iconsSettings.image,
         tag: 3
     )
     
@@ -49,14 +49,14 @@ final class TabBarController: UITabBarController {
         selectedIndex = 0
         
         view.backgroundColor = UIColor.clear
-        tabBar.backgroundColor = UIColor.clear
+        tabBar.backgroundColor = Asset.Colors.lightPurple.color
         tabBar.tintColor = UIColor.white
-        tabBar.unselectedItemTintColor = UIColor.gray
+        tabBar.unselectedItemTintColor = UIColor.white.withAlphaComponent(0.7)
         
         if #available(iOS 15.0, *) {
             let appearance = UITabBarAppearance()
             appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = .black
+            appearance.backgroundColor = Asset.Colors.lightPurple.color
             self.tabBar.standardAppearance = appearance
             self.tabBar.scrollEdgeAppearance = appearance
         }
