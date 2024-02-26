@@ -28,7 +28,7 @@ final class URLRequestBuilder {
             URLQueryItem(name: "lon", value: lon),
             URLQueryItem(name: "lang", value: "ru_RU"),
             URLQueryItem(name: "limit", value: "1"),
-            URLQueryItem(name: "hours", value: "false"),
+            URLQueryItem(name: "hours", value: "true"),
             URLQueryItem(name: "extra", value: "false"),
         ]
         guard let comurl = components?.url else {

@@ -30,6 +30,8 @@
 		848C79FB2B8A03DD00DBDDA9 /* UIBlockingProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C79FA2B8A03DD00DBDDA9 /* UIBlockingProgressHUD.swift */; };
 		848C79FD2B8A049800DBDDA9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C79FC2B8A049800DBDDA9 /* Alert.swift */; };
 		848C79FF2B8A04D000DBDDA9 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C79FE2B8A04D000DBDDA9 /* AlertModel.swift */; };
+		84DFDD7F2B8BE8C800163632 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DFDD7E2B8BE8C800163632 /* Array+Extensions.swift */; };
+		84DFDD812B8BEFD200163632 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DFDD802B8BEFD200163632 /* MainPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,8 @@
 		848C79FA2B8A03DD00DBDDA9 /* UIBlockingProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBlockingProgressHUD.swift; sourceTree = "<group>"; };
 		848C79FC2B8A049800DBDDA9 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		848C79FE2B8A04D000DBDDA9 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
+		84DFDD7E2B8BE8C800163632 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		84DFDD802B8BEFD200163632 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		9BC117D352B8679A8DB572FC /* Pods_iWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE34C47EF4FD80D672820045 /* Pods-iWeather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWeather.release.xcconfig"; path = "Target Support Files/Pods-iWeather/Pods-iWeather.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -125,6 +129,7 @@
 				848C79C62B864D4500DBDDA9 /* LaunchScreen.storyboard */,
 				848C79CF2B864D9100DBDDA9 /* TabBarController.swift */,
 				848C79BF2B864D4000DBDDA9 /* MainViewController.swift */,
+				84DFDD802B8BEFD200163632 /* MainPresenter.swift */,
 				848C79D12B864DFA00DBDDA9 /* SearchViewController.swift */,
 				848C79D32B864E4100DBDDA9 /* MapViewController.swift */,
 				848C79D52B864E6200DBDDA9 /* SettingsViewController.swift */,
@@ -174,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				848C79F62B89FE7900DBDDA9 /* String+Extensions.swift */,
+				84DFDD7E2B8BE8C800163632 /* Array+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -327,8 +333,10 @@
 				848C79F72B89FE7900DBDDA9 /* String+Extensions.swift in Sources */,
 				848C79F52B89FE1300DBDDA9 /* NetwokErrorModel.swift in Sources */,
 				848C79D02B864D9100DBDDA9 /* TabBarController.swift in Sources */,
+				84DFDD812B8BEFD200163632 /* MainPresenter.swift in Sources */,
 				848C79BC2B864D4000DBDDA9 /* AppDelegate.swift in Sources */,
 				848C79FF2B8A04D000DBDDA9 /* AlertModel.swift in Sources */,
+				84DFDD7F2B8BE8C800163632 /* Array+Extensions.swift in Sources */,
 				848C79BE2B864D4000DBDDA9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

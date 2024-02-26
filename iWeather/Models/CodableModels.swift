@@ -18,6 +18,11 @@ struct WeatherResponse: Codable {
     }
 }
 
+extension WeatherResponse: Reorderable {
+    typealias OrderElement = Double
+    var orderElement: OrderElement { info.lat }
+}
+
 struct Info: Codable {
     let n: Bool
     let geoid: Int
