@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		374E9BEEB247D7336CD97AC6 /* Pods_iWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BC117D352B8679A8DB572FC /* Pods_iWeather.framework */; };
 		8444FFC72B8DDED80080320E /* MainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444FFC62B8DDED80080320E /* MainItem.swift */; };
+		8444FFCB2B8E22330080320E /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444FFCA2B8E22330080320E /* CollectionView.swift */; };
 		848C79BC2B864D4000DBDDA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C79BB2B864D4000DBDDA9 /* AppDelegate.swift */; };
 		848C79BE2B864D4000DBDDA9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C79BD2B864D4000DBDDA9 /* SceneDelegate.swift */; };
 		848C79C02B864D4000DBDDA9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C79BF2B864D4000DBDDA9 /* MainViewController.swift */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		1B684D17747976E3E06CD29F /* Pods-iWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWeather.debug.xcconfig"; path = "Target Support Files/Pods-iWeather/Pods-iWeather.debug.xcconfig"; sourceTree = "<group>"; };
 		8444FFC62B8DDED80080320E /* MainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainItem.swift; sourceTree = "<group>"; };
+		8444FFCA2B8E22330080320E /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
 		848C79B82B864D4000DBDDA9 /* iWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848C79BB2B864D4000DBDDA9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		848C79BD2B864D4000DBDDA9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +93,34 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		844215852B8E3CB100ECF540 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				8444FFCA2B8E22330080320E /* CollectionView.swift */,
+				84B0D1292B8CC4E900395BD9 /* CollectionViewCell.swift */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		844215862B8E3CC000ECF540 /* MainItem */ = {
+			isa = PBXGroup;
+			children = (
+				8444FFC62B8DDED80080320E /* MainItem.swift */,
+			);
+			path = MainItem;
+			sourceTree = "<group>";
+		};
+		844215872B8E3CDB00ECF540 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				848C79BF2B864D4000DBDDA9 /* MainViewController.swift */,
+				84DFDD802B8BEFD200163632 /* MainPresenter.swift */,
+				844215862B8E3CC000ECF540 /* MainItem */,
+				844215852B8E3CB100ECF540 /* Collection */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		848C79AF2B864D4000DBDDA9 = {
 			isa = PBXGroup;
 			children = (
@@ -132,10 +162,7 @@
 			children = (
 				848C79C62B864D4500DBDDA9 /* LaunchScreen.storyboard */,
 				848C79CF2B864D9100DBDDA9 /* TabBarController.swift */,
-				848C79BF2B864D4000DBDDA9 /* MainViewController.swift */,
-				8444FFC62B8DDED80080320E /* MainItem.swift */,
-				84DFDD802B8BEFD200163632 /* MainPresenter.swift */,
-				84B0D1292B8CC4E900395BD9 /* CollectionViewCell.swift */,
+				844215872B8E3CDB00ECF540 /* Main */,
 				848C79D12B864DFA00DBDDA9 /* SearchViewController.swift */,
 				848C79D32B864E4100DBDDA9 /* MapViewController.swift */,
 				848C79D52B864E6200DBDDA9 /* SettingsViewController.swift */,
@@ -328,6 +355,7 @@
 				848C79D42B864E4100DBDDA9 /* MapViewController.swift in Sources */,
 				848C79EF2B89FDAF00DBDDA9 /* URLSession.swift in Sources */,
 				8444FFC72B8DDED80080320E /* MainItem.swift in Sources */,
+				8444FFCB2B8E22330080320E /* CollectionView.swift in Sources */,
 				848C79FD2B8A049800DBDDA9 /* Alert.swift in Sources */,
 				848C79FB2B8A03DD00DBDDA9 /* UIBlockingProgressHUD.swift in Sources */,
 				848C79F12B89FDC800DBDDA9 /* URLRequest.swift in Sources */,

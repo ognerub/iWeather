@@ -59,7 +59,7 @@ final class URLRequestBuilder {
         
         var request = URLRequest(url: baseURL)
         request.httpMethod = httpMethod
-        request.timeoutInterval = 15
+        request.timeoutInterval = 10
         return (request, baseURL)
     }
     

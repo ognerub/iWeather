@@ -15,14 +15,14 @@ final class ForcastService {
     let searchArray: [String] = [
         NetworkConstants.standart.moscow,
         NetworkConstants.standart.saintPetersburg,
-//        NetworkConstants.standart.novosibirsk,
-//        NetworkConstants.standart.ekaterinburg,
-//        NetworkConstants.standart.nizhniyNovgorod,
-//        NetworkConstants.standart.samara,
-//        NetworkConstants.standart.omsk,
-//        NetworkConstants.standart.kazan,
-//        NetworkConstants.standart.chelyabinsk,
-//        NetworkConstants.standart.rostovOnDon,
+        //        NetworkConstants.standart.novosibirsk,
+        //        NetworkConstants.standart.ekaterinburg,
+        //        NetworkConstants.standart.nizhniyNovgorod,
+        //        NetworkConstants.standart.samara,
+        //        NetworkConstants.standart.omsk,
+        //        NetworkConstants.standart.kazan,
+        //        NetworkConstants.standart.chelyabinsk,
+        //        NetworkConstants.standart.rostovOnDon,
         NetworkConstants.standart.murmansk
     ]
     
@@ -52,7 +52,7 @@ final class ForcastService {
                     let arrayToReorder = self.createArrayToReorder()
                     let reorderedArray = self.fetchedArray.reorder(by: arrayToReorder)
                     self.fetchedArray = reorderedArray
-                    completion(.success(reorderedArray))
+                    completion(.success(self.fetchedArray))
                 case .failure(let error):
                     completion(.failure(error))
                 }
@@ -60,8 +60,7 @@ final class ForcastService {
             }
             fetchGroupTask?.resume()
         }
-        group.notify(queue: .main) { [weak self] in
-            guard let self = self else { return }
+        group.notify(queue: .main) {
             NotificationCenter.default.post(
                 name: ForcastService.SearchResultDidChangeNotification,
                 object: self,

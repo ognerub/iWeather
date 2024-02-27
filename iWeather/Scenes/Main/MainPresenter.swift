@@ -3,6 +3,7 @@ import UIKit
 
 protocol MainPresenterProtocol: AnyObject {
     var uiBlockingProgressHUD: UIBlockingProgressHUDProtocol? { get set }
+    var alert: AlertPresenterProtocol? { get set }
     func viewDidLoad()
     func startFetchGroup()
 }
@@ -11,12 +12,13 @@ final class MainPresenter: MainPresenterProtocol {
     
     private let forcastService = ForcastService.shared
     private var forcastServiceObserver: NSObjectProtocol?
-    private var mainViewController: MainViewControllerProtocol?
     
     var uiBlockingProgressHUD: UIBlockingProgressHUDProtocol?
+    var alert: AlertPresenterProtocol?
+    
+    private var alertShown: Bool = false
     
     func viewDidLoad() {
-        mainViewController = MainViewController()
         startFetchGroup()
     }
     
@@ -28,10 +30,26 @@ final class MainPresenter: MainPresenterProtocol {
             case .success(_):
                 return
             case .failure:
-                self.mainViewController?.showNetWorkErrorForImagesListVC() {
+                let model = self.createAlertModel {
                     self.startFetchGroup()
+                    self.alertShown = false
+                }
+                if !self.alertShown {
+                    self.alertShown = true
+                    self.alert?.show(with: model)
                 }
             }
         }
+    }
+    
+    func createAlertModel(with completion: @escaping () -> Void) -> AlertModel{
+        let model = AlertModel(
+            title: "Что-то пошло не так(",
+            message: "Попробовать еще раз?",
+            firstButton: "Повторить",
+            secondButton: "Не надо",
+            firstCompletion: completion,
+            secondCompletion: { self.alertShown = false })
+        return model
     }
 }
