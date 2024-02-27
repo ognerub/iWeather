@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-protocol MainPresenterProtocol {
+protocol MainPresenterProtocol: AnyObject {
     var uiBlockingProgressHUD: UIBlockingProgressHUDProtocol? { get set }
     func viewDidLoad()
     func startFetchGroup()

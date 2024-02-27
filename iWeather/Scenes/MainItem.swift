@@ -1,8 +1,10 @@
 import UIKit
 
-final class CollectionViewCell: UICollectionViewCell {
-    
-    static let cellReuseIdentifier = "feedbacksCell"
+protocol MainItemProtocol: AnyObject {
+    func configureItem(with text: String)
+}
+
+final class MainItem: UIView, MainItemProtocol {
     
     private lazy var background: UIView = {
         let view = UIView()
@@ -24,7 +26,6 @@ final class CollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
         configureConstraints()
     }
     
@@ -32,26 +33,23 @@ final class CollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCell(
-        nameLabel: String
-    ) {
-        self.nameLabel.text = nameLabel
+    func configureItem(with text: String) {
+        self.nameLabel.text = text
     }
     
-    // MARK: - Configure constraints
     private func configureConstraints() {
         addSubview(background)
         NSLayoutConstraint.activate([
             background.topAnchor.constraint(equalTo: topAnchor),
+            background.heightAnchor.constraint(equalToConstant: 380),
             background.leadingAnchor.constraint(equalTo: leadingAnchor),
-            background.trailingAnchor.constraint(equalTo: trailingAnchor),
-            background.bottomAnchor.constraint(equalTo: bottomAnchor)
+            background.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
-        addSubview(nameLabel)
+        background.addSubview(nameLabel)
         NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+            nameLabel.bottomAnchor.constraint(equalTo: background.bottomAnchor, constant: -10),
+            nameLabel.leadingAnchor.constraint(equalTo: background.leadingAnchor, constant: 10),
+            nameLabel.trailingAnchor.constraint(equalTo: background.trailingAnchor, constant: -10)
         ])
     }
 }
