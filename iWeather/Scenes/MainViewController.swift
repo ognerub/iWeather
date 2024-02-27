@@ -12,7 +12,7 @@ final class MainViewController: UIViewController {
     private var uiBlockingProgressHUD: UIBlockingProgressHUDProtocol?
     private var presenter: MainPresenter?
     
-    weak var delegate: MainItemProtocol?
+    weak var mainItemDelegate: MainItemProtocol?
     
     private var showArray: [WeatherResponse] = [
         WeatherResponse(
@@ -66,7 +66,7 @@ final class MainViewController: UIViewController {
         return collection
     }()
     
-    private lazy var background: MainItem = {
+    private lazy var mainItem: MainItem = {
         let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 380)
         let view = MainItem(frame: frame)
         return view
@@ -93,7 +93,7 @@ final class MainViewController: UIViewController {
 // MARK: - Configuration
 private extension MainViewController {
     func constraintsConfiguration() {
-        view.addSubview(background)
+        view.addSubview(mainItem)
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 410),
@@ -118,20 +118,20 @@ private extension MainViewController {
             guard let self = self else { return }
             self.showArray = self.forcastService.fetchedArray
             self.presenter?.uiBlockingProgressHUD?.dismissCustom()
-            self.updateMainItem(with: 0)
+            self.updateUI(with: 0)
         }
     }
     
-    private func updateMainItem(
+    private func updateUI(
         with number: Int) {
             /// main item update
-            self.delegate = self.background
-            self.delegate?.configureItem(with: self.showArray[number].geoObject.locality.name)
+            self.mainItemDelegate = self.mainItem
+            self.mainItemDelegate?.configureItem(with: self.showArray[number].geoObject.locality.name)
             UIView.transition(with: self.view, duration: 0.25, options: [.transitionCrossDissolve], animations: {
-                self.background.removeFromSuperview()
+                self.mainItem.removeFromSuperview()
             }, completion: nil)
             UIView.transition(with: self.view, duration: 0.25, options: [.transitionCrossDissolve], animations: {
-                self.view.addSubview(self.background)
+                self.view.addSubview(self.mainItem)
             }, completion: nil)
             /// collection view update
             let filteredArray = self.forcastService.fetchedArray.filter( { $0.geoObject.locality.name
@@ -161,7 +161,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - Collection Delegate
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        updateMainItem(with: indexPath.row)
+        updateUI(with: indexPath.row)
     }
 }
 
