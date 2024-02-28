@@ -24,7 +24,7 @@ final class CitiesCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        backgroundColor = .clear
         configureConstraints()
     }
     

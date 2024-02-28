@@ -14,6 +14,7 @@ final class CitiesCollectionView: UICollectionView {
     }
     
     private func collectionConfiguration() {
+        backgroundColor = .clear
         dataSource = self
         delegate = self
         register(CitiesCollectionViewCell.self, forCellWithReuseIdentifier: CitiesCollectionViewCell.cellReuseIdentifier)

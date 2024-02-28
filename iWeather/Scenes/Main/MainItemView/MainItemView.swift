@@ -41,7 +41,7 @@ final class MainItemView: UIView, MainItemProtocol {
         addSubview(background)
         NSLayoutConstraint.activate([
             background.topAnchor.constraint(equalTo: topAnchor),
-            background.heightAnchor.constraint(equalToConstant: 380),
+            background.bottomAnchor.constraint(equalTo: bottomAnchor),
             background.leadingAnchor.constraint(equalTo: leadingAnchor),
             background.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])

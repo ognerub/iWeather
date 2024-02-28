@@ -25,6 +25,7 @@ private extension HoursCollectionView {
     }
     
     func collectionConfiguration() {
+        backgroundColor = .clear
         delegate = self
         dataSource = self
         register(HoursCollectionViewCell.self, forCellWithReuseIdentifier: HoursCollectionViewCell.cellReuseIdentifier)

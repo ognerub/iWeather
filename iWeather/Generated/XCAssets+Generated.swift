@@ -54,7 +54,8 @@ internal enum Asset {
     }
   }
   internal enum Colors {
-    internal static let lightPurple = ColorAsset(name: "Light_purple")
+    internal static let customLightPurple = ColorAsset(name: "CustomLightPurple")
+    internal static let customPurple = ColorAsset(name: "CustomPurple")
   }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

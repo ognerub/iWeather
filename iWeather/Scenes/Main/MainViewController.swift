@@ -7,7 +7,7 @@ protocol MainViewControllerCollectionProtocol: AnyObject {
 }
 
 final class MainViewController: UIViewController {
-    
+    // MARK: Properties
     var currentCity: WeatherResponse?
     
     var showArray: [WeatherResponse] = []
@@ -29,11 +29,14 @@ final class MainViewController: UIViewController {
     
     private lazy var contentView: UIView = {
         let view = UIView()
-        view.frame.size = contentSize
+        view.frame = CGRect(x: 0, y: -44, width: contentSize.width, height: contentSize.height)
         return view
     }()
     
-    private lazy var contentSize: CGSize = CGSize(width: view.frame.width, height: Double(380 + 275 + 152 + 30))
+    private lazy var contentSize: CGSize = CGSize(width: view.frame.width, height: Double(
+        mainItem.frame.height +
+        citiesCollectionView.frame.height +
+        hoursCollectionView.frame.height))
     
     private lazy var mainItem: MainItemView = {
         let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 380)
@@ -57,6 +60,7 @@ final class MainViewController: UIViewController {
         return collection
     }()
     
+    // MARK: Lifecycle
     override func loadView() {
         super.loadView()
         propertiesSetup()
@@ -64,8 +68,9 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .gray
+        view.backgroundColor = Asset.Colors.customPurple.color
         navigationController?.isNavigationBarHidden = true
+        navigationController?.navigationBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         constraintsConfiguration()
         presenter?.viewDidLoad()
         addObserverUsingNotificationCenter()
@@ -108,6 +113,7 @@ private extension MainViewController {
     }
 }
 
+// MARK: - MainViewControllerCollectionProtocol
 extension MainViewController: MainViewControllerCollectionProtocol {
     func updateUI(with itemNumber: Int) {
         /// Main item update

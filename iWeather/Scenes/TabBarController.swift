@@ -49,14 +49,14 @@ final class TabBarController: UITabBarController {
         selectedIndex = 0
         
         view.backgroundColor = UIColor.clear
-        tabBar.backgroundColor = Asset.Colors.lightPurple.color
+        tabBar.backgroundColor = Asset.Colors.customLightPurple.color
         tabBar.tintColor = UIColor.white
         tabBar.unselectedItemTintColor = UIColor.white.withAlphaComponent(0.7)
         
         if #available(iOS 15.0, *) {
             let appearance = UITabBarAppearance()
             appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = Asset.Colors.lightPurple.color
+            appearance.backgroundColor = Asset.Colors.customLightPurple.color
             self.tabBar.standardAppearance = appearance
             self.tabBar.scrollEdgeAppearance = appearance
         }
