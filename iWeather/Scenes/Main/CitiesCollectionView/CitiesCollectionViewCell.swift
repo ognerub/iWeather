@@ -1,6 +1,6 @@
 import UIKit
 
-final class CollectionViewCell: UICollectionViewCell {
+final class CitiesCollectionViewCell: UICollectionViewCell {
     
     static let cellReuseIdentifier = "feedbacksCell"
     

@@ -1,6 +1,6 @@
 import UIKit
 
-final class CollectionView: UICollectionView {
+final class CitiesCollectionView: UICollectionView {
     
     weak var mainViewControllerDelegate: MainViewControllerCollectionProtocol?
     
@@ -13,15 +13,15 @@ final class CollectionView: UICollectionView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func collectionConfiguration() {
+    private func collectionConfiguration() {
         dataSource = self
         delegate = self
-        register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.cellReuseIdentifier)
+        register(CitiesCollectionViewCell.self, forCellWithReuseIdentifier: CitiesCollectionViewCell.cellReuseIdentifier)
     }
 }
 
 // MARK: - Collection FlowLayout
-extension CollectionView: UICollectionViewDelegateFlowLayout {
+extension CitiesCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 172, height: 215)
     }
@@ -36,22 +36,22 @@ extension CollectionView: UICollectionViewDelegateFlowLayout {
 }
 
 // MARK: - Collection Delegate
-extension CollectionView: UICollectionViewDelegate {
+extension CitiesCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         mainViewControllerDelegate?.updateUI(with: indexPath.row)
     }
 }
 
 // MARK: - Collection DataSource
-extension CollectionView: UICollectionViewDataSource {
+extension CitiesCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return mainViewControllerDelegate?.showArray.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: CollectionViewCell.cellReuseIdentifier,
-            for: indexPath) as? CollectionViewCell
+            withReuseIdentifier: CitiesCollectionViewCell.cellReuseIdentifier,
+            for: indexPath) as? CitiesCollectionViewCell
         else {
             return UICollectionViewCell()
         }

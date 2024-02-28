@@ -2,10 +2,13 @@ import UIKit
 
 protocol MainViewControllerCollectionProtocol: AnyObject {
     var showArray: [WeatherResponse] { get }
+    var currentCity: WeatherResponse? { get }
     func updateUI(with: Int)
 }
 
 final class MainViewController: UIViewController {
+    
+    var currentCity: WeatherResponse?
     
     var showArray: [WeatherResponse] = []
     
@@ -17,17 +20,40 @@ final class MainViewController: UIViewController {
     private var uiBlockingProgressHUD: UIBlockingProgressHUDProtocol?
     private var presenter: MainPresenter?
     
-    private lazy var mainItem: MainItem = {
-        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 380)
-        let view = MainItem(frame: frame)
+    private lazy var scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.contentSize = contentSize
+        scroll.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        return scroll
+    }()
+    
+    private lazy var contentView: UIView = {
+        let view = UIView()
+        view.frame.size = contentSize
         return view
     }()
     
-    private lazy var collectionView: CollectionView = {
+    private lazy var contentSize: CGSize = CGSize(width: view.frame.width, height: Double(380 + 275 + 152 + 30))
+    
+    private lazy var mainItem: MainItemView = {
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 380)
+        let view = MainItemView(frame: frame)
+        return view
+    }()
+    
+    private lazy var citiesCollectionView: CitiesCollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let frame = CGRect(x: 0, y: 380, width: view.frame.width, height: 275)
-        let collection = CollectionView(frame: frame, layout: layout)
+        let collection = CitiesCollectionView(frame: frame, layout: layout)
+        return collection
+    }()
+    
+    private lazy var hoursCollectionView: HoursCollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let frame = CGRect(x: 0, y: 655, width: view.frame.width, height: 152)
+        let collection = HoursCollectionView(frame: frame, layout: layout)
         return collection
     }()
     
@@ -38,7 +64,8 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .gray
+        navigationController?.isNavigationBarHidden = true
         constraintsConfiguration()
         presenter?.viewDidLoad()
         addObserverUsingNotificationCenter()
@@ -50,15 +77,21 @@ final class MainViewController: UIViewController {
         presenter = MainPresenter()
         presenter?.uiBlockingProgressHUD = uiBlockingProgressHUD
         presenter?.alert = alertPresenter
-        collectionView.mainViewControllerDelegate = self
+        citiesCollectionView.mainViewControllerDelegate = self
+        hoursCollectionView.mainViewControllerDelegate = self
     }
 }
 
 // MARK: - Configuration
 private extension MainViewController {
     func constraintsConfiguration() {
-        view.addSubview(mainItem)
-        view.addSubview(collectionView)
+        view.addSubview(scrollView)
+        
+        scrollView.addSubview(contentView)
+        
+        contentView.addSubview(mainItem)
+        contentView.addSubview(citiesCollectionView)
+        contentView.addSubview(hoursCollectionView)
     }
     
     func addObserverUsingNotificationCenter() {
@@ -66,7 +99,8 @@ private extension MainViewController {
             forName: ForcastService.SearchResultDidChangeNotification,
             object: nil,
             queue: .main
-        ) { notification in
+        ) { [weak self] notification in
+            guard let self = self else { return }
             self.showArray = self.forcastService.fetchedArray
             self.presenter?.uiBlockingProgressHUD?.dismissCustom()
             self.updateUI(with: 0)
@@ -75,25 +109,37 @@ private extension MainViewController {
 }
 
 extension MainViewController: MainViewControllerCollectionProtocol {
-    func updateUI(with number: Int) {
-        /// main item update
-        self.mainItemDelegate = self.mainItem
-        let temp = String(self.showArray[number].fact.temp ?? 0)
-        let name = self.showArray[number].geoObject.locality.name
-        self.mainItemDelegate?.configureItem(with: name + " " + temp + "°C")
-        UIView.transition(with: self.view, duration: 0.25, options: [.transitionCrossDissolve], animations: {
-            self.mainItem.removeFromSuperview()
-        }, completion: nil)
-        UIView.transition(with: self.view, duration: 0.25, options: [.transitionCrossDissolve], animations: {
-            self.view.addSubview(self.mainItem)
-        }, completion: nil)
-        /// collection view update
-        let filteredArray = self.forcastService.fetchedArray.filter( { $0.geoObject.locality.name
-            != self.showArray[number].geoObject.locality.name } )
-        self.showArray = filteredArray
-        self.collectionView.performBatchUpdates( {
-            self.collectionView.reloadSections(IndexSet(integer: 0))
+    func updateUI(with itemNumber: Int) {
+        /// Main item update
+        mainItemDelegate = mainItem
+        if showArray.count > 0 {
+            currentCity = showArray[itemNumber]
+        }
+        guard let currentCity = currentCity else { return }
+        let temp = String(currentCity.fact.temp)
+        let name = currentCity.geoObject.locality.name
+        mainItemDelegate?.configureItem(with: name + " " + temp + "°C")
+        animatedAdd(of: mainItem)
+        /// Cities collection view update
+        let filteredArray = forcastService.fetchedArray.filter( { $0.geoObject.locality.name
+            != showArray[itemNumber].geoObject.locality.name } )
+        showArray = filteredArray
+        citiesCollectionView.performBatchUpdates( {
+            citiesCollectionView.reloadSections(IndexSet(integer: 0))
         })
+        /// Hours collection view update
+        hoursCollectionView.performBatchUpdates( {
+            hoursCollectionView.reloadSections(IndexSet(integer: 0))
+        })
+    }
+    
+    private func animatedAdd(of item: UIView) {
+        UIView.transition(with: view, duration: 0.25, options: [.transitionCrossDissolve], animations: {
+            item.removeFromSuperview()
+        }, completion: nil)
+        UIView.transition(with: view, duration: 0.25, options: [.transitionCrossDissolve], animations: {
+            self.contentView.addSubview(item)
+        }, completion: nil)
     }
 }
 
