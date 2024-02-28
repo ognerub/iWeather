@@ -1,7 +1,7 @@
 import UIKit
 
 protocol MainItemProtocol: AnyObject {
-    func configureItem(with text: String)
+    func configureItem(with text: String, image: UIImage)
 }
 
 final class MainItemView: UIView, MainItemProtocol {
@@ -13,6 +13,12 @@ final class MainItemView: UIView, MainItemProtocol {
         view.backgroundColor = UIColor.yellow
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
+    }()
+    
+    private lazy var imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
     
     private lazy var nameLabel: UILabel = {
@@ -33,8 +39,12 @@ final class MainItemView: UIView, MainItemProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureItem(with text: String) {
+    func configureItem(
+        with text: String,
+        image: UIImage
+    ) {
         self.nameLabel.text = text
+        self.imageView.image = image
     }
     
     private func configureConstraints() {
@@ -44,6 +54,13 @@ final class MainItemView: UIView, MainItemProtocol {
             background.bottomAnchor.constraint(equalTo: bottomAnchor),
             background.leadingAnchor.constraint(equalTo: leadingAnchor),
             background.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+        background.addSubview(imageView)
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: background.topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: background.bottomAnchor),
+            imageView.leadingAnchor.constraint(equalTo: background.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: background.trailingAnchor)
         ])
         background.addSubview(nameLabel)
         NSLayoutConstraint.activate([

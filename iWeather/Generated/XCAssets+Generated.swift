@@ -29,6 +29,34 @@ internal enum Asset {
       internal static let iconsBurger = ImageAsset(name: "Icons_burger")
       internal static let iconsProfile = ImageAsset(name: "Icons_profile")
     }
+    internal enum Cities {
+      internal enum Large {
+        internal static let chelyabinsk = ImageAsset(name: "chelyabinsk")
+        internal static let ekaterinburg = ImageAsset(name: "ekaterinburg")
+        internal static let kazan = ImageAsset(name: "kazan")
+        internal static let moscow = ImageAsset(name: "moscow")
+        internal static let murmansk = ImageAsset(name: "murmansk")
+        internal static let nizhniyNovgorod = ImageAsset(name: "nizhniyNovgorod")
+        internal static let novosibirsk = ImageAsset(name: "novosibirsk")
+        internal static let omsk = ImageAsset(name: "omsk")
+        internal static let rostovOnDon = ImageAsset(name: "rostov-on-don")
+        internal static let saintPetersburg = ImageAsset(name: "saintPetersburg")
+        internal static let samara = ImageAsset(name: "samara")
+      }
+      internal enum Small {
+        internal static let chelyabinskSmall = ImageAsset(name: "chelyabinsk_small")
+        internal static let ekaterinburgSmall = ImageAsset(name: "ekaterinburg_small")
+        internal static let kazanSmall = ImageAsset(name: "kazan_small")
+        internal static let moscowSmall = ImageAsset(name: "moscow_small")
+        internal static let murmanskSmall = ImageAsset(name: "murmansk_small")
+        internal static let nizhniyNovgorodSmall = ImageAsset(name: "nizhniyNovgorod_small")
+        internal static let novosibirskSmall = ImageAsset(name: "novosibirsk_small")
+        internal static let omskSmall = ImageAsset(name: "omsk_small")
+        internal static let rostovOnDon = ImageAsset(name: "rostov-on-don")
+        internal static let saintPetersburgSmall = ImageAsset(name: "saintPetersburg_small")
+        internal static let samaraSmall = ImageAsset(name: "samara_small")
+      }
+    }
     internal static let iconsArrowDown = ImageAsset(name: "Icons_arrow_down")
     internal static let iconsArrowRight = ImageAsset(name: "Icons_arrow_right")
     internal enum TabBarItems {

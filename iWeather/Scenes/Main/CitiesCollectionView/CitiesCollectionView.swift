@@ -58,8 +58,11 @@ extension CitiesCollectionView: UICollectionViewDataSource {
         }
         let temp = String(mainViewControllerDelegate?.showArray[indexPath.row].fact.temp ?? 0)
         let name: String = mainViewControllerDelegate?.showArray[indexPath.row].geoObject.locality.name ?? ""
+        let onlyName: String = mainViewControllerDelegate?.getOnlyName(from: name) ?? ""
+        let image = mainViewControllerDelegate?.getImageFor(currentCity: mainViewControllerDelegate?.showArray[indexPath.row], largeSize: false)
         cell.configureCell(
-            nameLabel: name + " " + temp + "°C"
+            nameLabel: onlyName + " " + temp + "°C",
+            image: image ?? UIImage()
         )
         return cell
     }

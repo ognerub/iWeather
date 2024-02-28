@@ -4,7 +4,6 @@ import UIKit
 protocol MainPresenterProtocol: AnyObject {
     var uiBlockingProgressHUD: UIBlockingProgressHUDProtocol? { get set }
     var alert: AlertPresenterProtocol? { get set }
-    func viewDidLoad()
     func startFetchGroup()
 }
 
@@ -17,10 +16,6 @@ final class MainPresenter: MainPresenterProtocol {
     var alert: AlertPresenterProtocol?
     
     private var alertShown: Bool = false
-    
-    func viewDidLoad() {
-        startFetchGroup()
-    }
     
     func startFetchGroup() {
         uiBlockingProgressHUD?.showCustom()

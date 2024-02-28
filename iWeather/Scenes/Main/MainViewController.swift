@@ -4,6 +4,8 @@ protocol MainViewControllerCollectionProtocol: AnyObject {
     var showArray: [WeatherResponse] { get }
     var currentCity: WeatherResponse? { get }
     func updateUI(with: Int)
+    func getOnlyName(from name: String) -> String
+    func getImageFor(currentCity: WeatherResponse?, largeSize: Bool) -> UIImage
 }
 
 final class MainViewController: UIViewController {
@@ -70,10 +72,12 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Asset.Colors.customPurple.color
         navigationController?.isNavigationBarHidden = true
-        navigationController?.navigationBar.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         constraintsConfiguration()
-        presenter?.viewDidLoad()
         addObserverUsingNotificationCenter()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        presenter?.startFetchGroup()
     }
     
     private func propertiesSetup() {
@@ -124,7 +128,12 @@ extension MainViewController: MainViewControllerCollectionProtocol {
         guard let currentCity = currentCity else { return }
         let temp = String(currentCity.fact.temp)
         let name = currentCity.geoObject.locality.name
-        mainItemDelegate?.configureItem(with: name + " " + temp + "°C")
+        let onlyName = getOnlyName(from: name)
+        let image = getImageFor(currentCity: currentCity, largeSize: true)
+        mainItemDelegate?.configureItem(
+            with: onlyName + " " + temp + "°C",
+            image: image
+        )
         animatedAdd(of: mainItem)
         /// Cities collection view update
         let filteredArray = forcastService.fetchedArray.filter( { $0.geoObject.locality.name
@@ -137,6 +146,62 @@ extension MainViewController: MainViewControllerCollectionProtocol {
         hoursCollectionView.performBatchUpdates( {
             hoursCollectionView.reloadSections(IndexSet(integer: 0))
         })
+    }
+    
+    func getOnlyName(from name: String) -> String {
+        let separator = "округ "
+        let stringComponents = name.components(separatedBy: separator)
+        var onlyName = stringComponents[0]
+        if stringComponents.count > 0 {
+            onlyName = stringComponents[stringComponents.count-1]
+        }
+        return onlyName
+    }
+    
+    private enum CityName: String {
+        case moscow = "москва"
+        case saintPetersburg = "санкт-петербург"
+        case novosibirsk = "новосибирск"
+        case ekaterinburg = "екатеринбург"
+        case nizhniyNovgorod = "нижний новгород"
+        case samara = "самара"
+        case omsk = "омск"
+        case kazan = "казань"
+        case chelyabinsk = "челябинск"
+        case rostovOnDon = "ростов-на-дону"
+        case murmansk = "мурманск"
+    }
+    
+    func getImageFor(currentCity: WeatherResponse?, largeSize: Bool) -> UIImage {
+        guard let currentCity = currentCity else { return UIImage() }
+        let name = currentCity.geoObject.locality.name.lowercased()
+        let onlyName = getOnlyName(from: name)
+        switch onlyName {
+        case CityName.moscow.rawValue:
+            return largeSize ? Asset.Assets.Cities.Large.moscow.image : Asset.Assets.Cities.Small.moscowSmall.image
+        case CityName.saintPetersburg.rawValue:
+            return largeSize ? Asset.Assets.Cities.Large.saintPetersburg.image : Asset.Assets.Cities.Small.saintPetersburgSmall.image
+        case CityName.novosibirsk.rawValue:
+            return largeSize ? Asset.Assets.Cities.Large.novosibirsk.image : Asset.Assets.Cities.Small.novosibirskSmall.image
+        case CityName.ekaterinburg.rawValue:
+            return largeSize ? Asset.Assets.Cities.Large.ekaterinburg.image : Asset.Assets.Cities.Small.ekaterinburgSmall.image
+        case CityName.samara.rawValue:
+            return largeSize ? Asset.Assets.Cities.Large.samara.image : Asset.Assets.Cities.Small.samaraSmall.image
+        case CityName.omsk.rawValue:
+            return largeSize ? Asset.Assets.Cities.Large.omsk.image : Asset.Assets.Cities.Small.omskSmall.image
+        case CityName.kazan.rawValue:
+            return largeSize ? Asset.Assets.Cities.Large.kazan.image : Asset.Assets.Cities.Small.kazanSmall.image
+        case CityName.rostovOnDon.rawValue:
+            return largeSize ? Asset.Assets.Cities.Large.rostovOnDon.image : Asset.Assets.Cities.Small.rostovOnDon.image
+        case CityName.murmansk.rawValue:
+            return largeSize ? Asset.Assets.Cities.Large.murmansk.image : Asset.Assets.Cities.Small.murmanskSmall.image
+        case CityName.nizhniyNovgorod.rawValue:
+            return largeSize ? Asset.Assets.Cities.Large.nizhniyNovgorod.image : Asset.Assets.Cities.Small.nizhniyNovgorodSmall.image
+        case CityName.chelyabinsk.rawValue:
+            return largeSize ? Asset.Assets.Cities.Large.chelyabinsk.image : Asset.Assets.Cities.Small.chelyabinskSmall.image
+        default:
+            return UIImage()
+        }
     }
     
     private func animatedAdd(of item: UIView) {

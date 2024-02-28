@@ -13,6 +13,12 @@ final class CitiesCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
+    private lazy var imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.adjustsFontSizeToFitWidth = true
@@ -33,9 +39,11 @@ final class CitiesCollectionViewCell: UICollectionViewCell {
     }
     
     func configureCell(
-        nameLabel: String
+        nameLabel: String,
+        image: UIImage
     ) {
         self.nameLabel.text = nameLabel
+        self.imageView.image = image
     }
     
     // MARK: - Configure constraints
@@ -46,6 +54,13 @@ final class CitiesCollectionViewCell: UICollectionViewCell {
             background.leadingAnchor.constraint(equalTo: leadingAnchor),
             background.trailingAnchor.constraint(equalTo: trailingAnchor),
             background.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+        background.addSubview(imageView)
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: background.topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: background.bottomAnchor),
+            imageView.leadingAnchor.constraint(equalTo: background.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: background.trailingAnchor)
         ])
         addSubview(nameLabel)
         NSLayoutConstraint.activate([
