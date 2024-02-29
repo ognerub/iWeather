@@ -52,13 +52,9 @@ final class MainViewController: UIViewController {
         button.addTarget(self, action: #selector(didTapProfile), for: .touchUpInside)
         button.setImage(Asset.Assets.Buttons.iconsProfile.image, for: .normal)
         button.backgroundColor = .clear
+        button.isIncreasedHitAreaEnabled = true
         return button
     }()
-    
-    @objc
-    private func didTapProfile() {
-        print("profileButton")
-    }
     
     private lazy var burgerButton: UIButton = {
         let frame = CGRect(x: view.frame.width - 34 - 25, y: 50, width: 34, height: 34)
@@ -66,13 +62,9 @@ final class MainViewController: UIViewController {
         button.addTarget(self, action: #selector(didTapBurger), for: .touchUpInside)
         button.setImage(Asset.Assets.Buttons.iconsBurger.image, for: .normal)
         button.backgroundColor = .clear
+        button.isIncreasedHitAreaEnabled = true
         return button
     }()
-    
-    @objc
-    private func didTapBurger() {
-        print("profileButton")
-    }
     
     private lazy var citiesCollectionView: CitiesCollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -126,6 +118,16 @@ final class MainViewController: UIViewController {
         presenter?.alert = alertPresenter
         citiesCollectionView.mainViewControllerDelegate = self
         hoursCollectionView.mainViewControllerDelegate = self
+    }
+    
+    @objc
+    private func didTapProfile() {
+        print("profileButton")
+    }
+    
+    @objc
+    private func didTapBurger() {
+        print("profileBurger")
     }
 }
 
