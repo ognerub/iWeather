@@ -8,16 +8,26 @@ final class HoursCollectionViewCell: UICollectionViewCell {
         let view = UIView()
         view.layer.cornerRadius = 15
         view.layer.masksToBounds = true
-        view.backgroundColor = UIColor.yellow
+        view.backgroundColor = Asset.Colors.customLightPurple.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private lazy var nameLabel: UILabel = {
+    private lazy var tempLabel: UILabel = {
         let label = UILabel()
         label.adjustsFontSizeToFitWidth = true
-        label.textColor = UIColor.blue
-        label.font = UIFont.systemFont(ofSize: 13, weight: .bold)
+        label.textColor = UIColor.white
+        label.font = UIFont.init(name: "Poppins-Medium", size: 15)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var hourLabel: UILabel = {
+        let label = UILabel()
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = UIColor.white
+        label.font = UIFont.init(name: "Poppins-SemiBold", size: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -33,9 +43,11 @@ final class HoursCollectionViewCell: UICollectionViewCell {
     }
     
     func configureCell(
-        nameLabel: String
+        temp: String,
+        hour: String
     ) {
-        self.nameLabel.text = nameLabel
+        self.tempLabel.text = temp
+        self.hourLabel.text = hour
     }
     
     // MARK: - Configure constraints
@@ -47,11 +59,16 @@ final class HoursCollectionViewCell: UICollectionViewCell {
             background.trailingAnchor.constraint(equalTo: trailingAnchor),
             background.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40)
         ])
-        addSubview(nameLabel)
+        background.addSubview(tempLabel)
         NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+            tempLabel.bottomAnchor.constraint(equalTo: background.bottomAnchor, constant: -10),
+            tempLabel.leadingAnchor.constraint(equalTo: background.leadingAnchor, constant: 10),
+            tempLabel.trailingAnchor.constraint(equalTo: background.trailingAnchor, constant: -10)
+        ])
+        addSubview(hourLabel)
+        NSLayoutConstraint.activate([
+            hourLabel.topAnchor.constraint(equalTo: background.bottomAnchor),
+            hourLabel.centerXAnchor.constraint(equalTo: tempLabel.centerXAnchor)
         ])
     }
 }

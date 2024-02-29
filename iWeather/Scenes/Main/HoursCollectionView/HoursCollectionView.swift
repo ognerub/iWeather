@@ -66,8 +66,8 @@ extension HoursCollectionView: UICollectionViewDataSource {
         let temp = labels.1
         
         cell.configureCell(
-            nameLabel: hour + " " + temp
-        )
+            temp: temp,
+            hour: hour)
         return cell
     }
     

@@ -10,6 +10,14 @@
 		374E9BEEB247D7336CD97AC6 /* Pods_iWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BC117D352B8679A8DB572FC /* Pods_iWeather.framework */; };
 		8442158A2B8F0C7D00ECF540 /* HoursCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844215892B8F0C7D00ECF540 /* HoursCollectionView.swift */; };
 		8442158C2B8F0CBA00ECF540 /* HoursCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442158B2B8F0CBA00ECF540 /* HoursCollectionViewCell.swift */; };
+		844215932B8F869500ECF540 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8442158E2B8F869500ECF540 /* Roboto-Black.ttf */; };
+		844215942B8F869500ECF540 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8442158F2B8F869500ECF540 /* Roboto-Regular.ttf */; };
+		844215952B8F869500ECF540 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 844215902B8F869500ECF540 /* Roboto-Bold.ttf */; };
+		844215962B8F869500ECF540 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 844215912B8F869500ECF540 /* Roboto-Medium.ttf */; };
+		844215972B8F869500ECF540 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 844215922B8F869500ECF540 /* Roboto-Light.ttf */; };
+		8442159B2B8F8D3900ECF540 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 844215982B8F8D3800ECF540 /* Poppins-SemiBold.ttf */; };
+		8442159C2B8F8D3900ECF540 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 844215992B8F8D3800ECF540 /* Poppins-Medium.ttf */; };
+		8442159D2B8F8D3900ECF540 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8442159A2B8F8D3800ECF540 /* Poppins-Regular.ttf */; };
 		8444FFC72B8DDED80080320E /* MainItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444FFC62B8DDED80080320E /* MainItemView.swift */; };
 		8444FFCB2B8E22330080320E /* CitiesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444FFCA2B8E22330080320E /* CitiesCollectionView.swift */; };
 		848C79BC2B864D4000DBDDA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C79BB2B864D4000DBDDA9 /* AppDelegate.swift */; };
@@ -43,6 +51,14 @@
 		1B684D17747976E3E06CD29F /* Pods-iWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWeather.debug.xcconfig"; path = "Target Support Files/Pods-iWeather/Pods-iWeather.debug.xcconfig"; sourceTree = "<group>"; };
 		844215892B8F0C7D00ECF540 /* HoursCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoursCollectionView.swift; sourceTree = "<group>"; };
 		8442158B2B8F0CBA00ECF540 /* HoursCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoursCollectionViewCell.swift; sourceTree = "<group>"; };
+		8442158E2B8F869500ECF540 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
+		8442158F2B8F869500ECF540 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		844215902B8F869500ECF540 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		844215912B8F869500ECF540 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		844215922B8F869500ECF540 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		844215982B8F8D3800ECF540 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		844215992B8F8D3800ECF540 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		8442159A2B8F8D3800ECF540 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		8444FFC62B8DDED80080320E /* MainItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainItemView.swift; sourceTree = "<group>"; };
 		8444FFCA2B8E22330080320E /* CitiesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesCollectionView.swift; sourceTree = "<group>"; };
 		848C79B82B864D4000DBDDA9 /* iWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,20 +122,12 @@
 			path = CitiesCollectionView;
 			sourceTree = "<group>";
 		};
-		844215862B8E3CC000ECF540 /* MainItemView */ = {
-			isa = PBXGroup;
-			children = (
-				8444FFC62B8DDED80080320E /* MainItemView.swift */,
-			);
-			path = MainItemView;
-			sourceTree = "<group>";
-		};
 		844215872B8E3CDB00ECF540 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				848C79BF2B864D4000DBDDA9 /* MainViewController.swift */,
 				84DFDD802B8BEFD200163632 /* MainPresenter.swift */,
-				844215862B8E3CC000ECF540 /* MainItemView */,
+				8444FFC62B8DDED80080320E /* MainItemView.swift */,
 				844215852B8E3CB100ECF540 /* CitiesCollectionView */,
 				844215882B8F0C6A00ECF540 /* HoursCollectionView */,
 			);
@@ -133,6 +141,21 @@
 				8442158B2B8F0CBA00ECF540 /* HoursCollectionViewCell.swift */,
 			);
 			path = HoursCollectionView;
+			sourceTree = "<group>";
+		};
+		8442158D2B8F867F00ECF540 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				844215992B8F8D3800ECF540 /* Poppins-Medium.ttf */,
+				8442159A2B8F8D3800ECF540 /* Poppins-Regular.ttf */,
+				844215982B8F8D3800ECF540 /* Poppins-SemiBold.ttf */,
+				8442158E2B8F869500ECF540 /* Roboto-Black.ttf */,
+				844215902B8F869500ECF540 /* Roboto-Bold.ttf */,
+				844215922B8F869500ECF540 /* Roboto-Light.ttf */,
+				844215912B8F869500ECF540 /* Roboto-Medium.ttf */,
+				8442158F2B8F869500ECF540 /* Roboto-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		848C79AF2B864D4000DBDDA9 = {
@@ -187,6 +210,7 @@
 		848C79D82B876B1D00DBDDA9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8442158D2B8F867F00ECF540 /* Fonts */,
 				848C79C42B864D4500DBDDA9 /* Assets.xcassets */,
 				848C79E42B87783500DBDDA9 /* Colors.xcassets */,
 			);
@@ -308,10 +332,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				844215962B8F869500ECF540 /* Roboto-Medium.ttf in Resources */,
+				844215952B8F869500ECF540 /* Roboto-Bold.ttf in Resources */,
+				8442159C2B8F8D3900ECF540 /* Poppins-Medium.ttf in Resources */,
+				8442159D2B8F8D3900ECF540 /* Poppins-Regular.ttf in Resources */,
+				844215942B8F869500ECF540 /* Roboto-Regular.ttf in Resources */,
 				848C79C82B864D4500DBDDA9 /* LaunchScreen.storyboard in Resources */,
 				848C79E52B87783500DBDDA9 /* Colors.xcassets in Resources */,
+				8442159B2B8F8D3900ECF540 /* Poppins-SemiBold.ttf in Resources */,
+				844215932B8F869500ECF540 /* Roboto-Black.ttf in Resources */,
 				848C79C52B864D4500DBDDA9 /* Assets.xcassets in Resources */,
 				848C79E12B87767700DBDDA9 /* swiftgen.yml in Resources */,
+				844215972B8F869500ECF540 /* Roboto-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

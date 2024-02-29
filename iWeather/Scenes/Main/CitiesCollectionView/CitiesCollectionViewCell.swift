@@ -8,7 +8,7 @@ final class CitiesCollectionViewCell: UICollectionViewCell {
         let view = UIView()
         view.layer.cornerRadius = 15
         view.layer.masksToBounds = true
-        view.backgroundColor = UIColor.yellow
+        view.backgroundColor = Asset.Colors.customLightPurple.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -22,8 +22,9 @@ final class CitiesCollectionViewCell: UICollectionViewCell {
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.adjustsFontSizeToFitWidth = true
-        label.textColor = UIColor.blue
-        label.font = UIFont.systemFont(ofSize: 13, weight: .bold)
+        label.textColor = UIColor.white
+        label.font = UIFont.init(name: "Poppins-SemiBold", size: 18)
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

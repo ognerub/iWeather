@@ -46,12 +46,51 @@ final class MainViewController: UIViewController {
         return view
     }()
     
+    private lazy var profileButton: UIButton = {
+        let frame = CGRect(x: 25, y: 50, width: 34, height: 34)
+        let button = UIButton(frame: frame)
+        button.addTarget(self, action: #selector(didTapProfile), for: .touchUpInside)
+        button.setImage(Asset.Assets.Buttons.iconsProfile.image, for: .normal)
+        button.backgroundColor = .clear
+        return button
+    }()
+    
+    @objc
+    private func didTapProfile() {
+        print("profileButton")
+    }
+    
+    private lazy var burgerButton: UIButton = {
+        let frame = CGRect(x: view.frame.width - 34 - 25, y: 50, width: 34, height: 34)
+        let button = UIButton(frame: frame)
+        button.addTarget(self, action: #selector(didTapBurger), for: .touchUpInside)
+        button.setImage(Asset.Assets.Buttons.iconsBurger.image, for: .normal)
+        button.backgroundColor = .clear
+        return button
+    }()
+    
+    @objc
+    private func didTapBurger() {
+        print("profileButton")
+    }
+    
     private lazy var citiesCollectionView: CitiesCollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let frame = CGRect(x: 0, y: 380, width: view.frame.width, height: 275)
         let collection = CitiesCollectionView(frame: frame, layout: layout)
         return collection
+    }()
+    
+    private lazy var todayLabel: UILabel = {
+        let label = UILabel()
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = UIColor.white
+        label.text = "Today"
+        label.font = UIFont.init(name: "Poppins-Medium", size: 20)
+        label.textAlignment = .left
+        label.frame = CGRect(x: 25, y: 655, width: 200, height: 30)
+        return label
     }()
     
     private lazy var hoursCollectionView: HoursCollectionView = {
@@ -72,7 +111,6 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Asset.Colors.customPurple.color
         navigationController?.isNavigationBarHidden = true
-        constraintsConfiguration()
         addObserverUsingNotificationCenter()
     }
     
@@ -99,7 +137,10 @@ private extension MainViewController {
         scrollView.addSubview(contentView)
         
         contentView.addSubview(mainItem)
+        mainItem.addSubview(profileButton)
+        mainItem.addSubview(burgerButton)
         contentView.addSubview(citiesCollectionView)
+        contentView.addSubview(todayLabel)
         contentView.addSubview(hoursCollectionView)
     }
     
@@ -110,6 +151,8 @@ private extension MainViewController {
             queue: .main
         ) { [weak self] notification in
             guard let self = self else { return }
+            self.constraintsConfiguration()
+            self.scrollView.setContentOffset(CGPoint(x: 0, y: -44), animated: true)
             self.showArray = self.forcastService.fetchedArray
             self.presenter?.uiBlockingProgressHUD?.dismissCustom()
             self.updateUI(with: 0)
@@ -130,8 +173,11 @@ extension MainViewController: MainViewControllerCollectionProtocol {
         let name = currentCity.geoObject.locality.name
         let onlyName = getOnlyName(from: name)
         let image = getImageFor(currentCity: currentCity, largeSize: true)
-        mainItemDelegate?.configureItem(
-            with: onlyName + " " + temp + "°C",
+        mainItemDelegate?.configureItemWith(
+            name: onlyName,
+            temp: temp + "°C",
+            info: "20 Apr Wed 20°C/29°C",
+            condition: "Clear sky",
             image: image
         )
         animatedAdd(of: mainItem)
@@ -146,6 +192,7 @@ extension MainViewController: MainViewControllerCollectionProtocol {
         hoursCollectionView.performBatchUpdates( {
             hoursCollectionView.reloadSections(IndexSet(integer: 0))
         })
+        hoursCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .centeredHorizontally, animated: true)
     }
     
     func getOnlyName(from name: String) -> String {
