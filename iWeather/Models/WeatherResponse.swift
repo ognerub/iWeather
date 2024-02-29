@@ -118,3 +118,4 @@ struct Hour: Codable {
     let icon: String
     let condition: String
 }
+

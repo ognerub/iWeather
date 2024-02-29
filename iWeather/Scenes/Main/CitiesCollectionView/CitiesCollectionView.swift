@@ -56,13 +56,18 @@ extension CitiesCollectionView: UICollectionViewDataSource {
         else {
             return UICollectionViewCell()
         }
-        let temp = String(mainViewControllerDelegate?.showArray[indexPath.row].fact.temp ?? 0)
-        let name: String = mainViewControllerDelegate?.showArray[indexPath.row].geoObject.locality.name ?? ""
-        let onlyName: String = mainViewControllerDelegate?.getOnlyName(from: name) ?? ""
-        let image = mainViewControllerDelegate?.getImageFor(currentCity: mainViewControllerDelegate?.showArray[indexPath.row], largeSize: false)
+        guard let delegate = mainViewControllerDelegate else { return cell }
+        let currentWeatherResponse = delegate.showArray[indexPath.row]
+        let temp = String(currentWeatherResponse.fact.temp)
+        let name: String = delegate.getName(from: currentWeatherResponse)
+        let image = delegate.getImageFor(currentWeatherResponse: currentWeatherResponse, largeSize: false)
+        let color = Asset.Colors.customLightPurple.color
+        let backgroundImage = delegate.getConditionAndImage(for: currentWeatherResponse).1
         cell.configureCell(
-            nameLabel: onlyName + " " + temp + "°C",
-            image: image ?? UIImage()
+            nameLabel: name + " " + temp + "°C",
+            image: image,
+            backgroundColor: color,
+            backgroundImage: backgroundImage
         )
         return cell
     }

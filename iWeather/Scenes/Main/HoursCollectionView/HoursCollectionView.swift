@@ -50,7 +50,7 @@ extension HoursCollectionView: UICollectionViewDelegateFlowLayout {
 // MARK: - Collection DataSource
 extension HoursCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let numberOfItems: Int = mainViewControllerDelegate?.currentCity?.forecasts.flatMap { return $0.hours }.count ?? 0
+        let numberOfItems: Int = mainViewControllerDelegate?.currentWeatherResponse?.forecasts.flatMap { return $0.hours }.count ?? 0
         return numberOfItems
     }
     
@@ -72,7 +72,7 @@ extension HoursCollectionView: UICollectionViewDataSource {
     }
     
     private func createLabels(using indexPath: IndexPath) -> (String, String) {
-        let hoursArray: [Hour] = mainViewControllerDelegate?.currentCity?.forecasts.flatMap {
+        let hoursArray: [Hour] = mainViewControllerDelegate?.currentWeatherResponse?.forecasts.flatMap {
             return $0.hours
         } ?? []
         let intArray: [Int] = hoursArray.compactMap {

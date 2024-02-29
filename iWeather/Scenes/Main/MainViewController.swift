@@ -2,15 +2,16 @@ import UIKit
 
 protocol MainViewControllerCollectionProtocol: AnyObject {
     var showArray: [WeatherResponse] { get }
-    var currentCity: WeatherResponse? { get }
+    var currentWeatherResponse: WeatherResponse? { get }
     func updateUI(with: Int)
-    func getOnlyName(from name: String) -> String
-    func getImageFor(currentCity: WeatherResponse?, largeSize: Bool) -> UIImage
+    func getName(from currentWeatherResponse: WeatherResponse) -> String
+    func getImageFor(currentWeatherResponse: WeatherResponse?, largeSize: Bool) -> UIImage
+    func getConditionAndImage(for currentWeatherResponse: WeatherResponse) -> (String, UIImage)
 }
 
 final class MainViewController: UIViewController {
     // MARK: Properties
-    var currentCity: WeatherResponse?
+    var currentWeatherResponse: WeatherResponse?
     
     var showArray: [WeatherResponse] = []
     
@@ -135,9 +136,7 @@ final class MainViewController: UIViewController {
 private extension MainViewController {
     func constraintsConfiguration() {
         view.addSubview(scrollView)
-        
         scrollView.addSubview(contentView)
-        
         contentView.addSubview(mainItem)
         mainItem.addSubview(profileButton)
         mainItem.addSubview(burgerButton)
@@ -168,19 +167,25 @@ extension MainViewController: MainViewControllerCollectionProtocol {
         /// Main item update
         mainItemDelegate = mainItem
         if showArray.count > 0 {
-            currentCity = showArray[itemNumber]
+            currentWeatherResponse = showArray[itemNumber]
         }
-        guard let currentCity = currentCity else { return }
-        let temp = String(currentCity.fact.temp)
-        let name = currentCity.geoObject.locality.name
-        let onlyName = getOnlyName(from: name)
-        let image = getImageFor(currentCity: currentCity, largeSize: true)
+        guard let currentWeatherResponse = currentWeatherResponse else { return }
+        let image = getImageFor(currentWeatherResponse: currentWeatherResponse, largeSize: true)
+        let name = getName(from: currentWeatherResponse)
+        let temp = String(currentWeatherResponse.fact.temp)
+        let condition = getConditionAndImage(for: currentWeatherResponse)
+        let conditionString = condition.0
+        let color = Asset.Colors.customLightPurple.color
+        let backgroundImage = condition.1
+        
         mainItemDelegate?.configureItemWith(
-            name: onlyName,
+            name: name,
             temp: temp + "°C",
             info: "20 Apr Wed 20°C/29°C",
-            condition: "Clear sky",
-            image: image
+            condition: conditionString,
+            image: image,
+            backgroundImage: backgroundImage,
+            backgroundColor: color
         )
         animatedAdd(of: mainItem)
         /// Cities collection view update
@@ -197,7 +202,39 @@ extension MainViewController: MainViewControllerCollectionProtocol {
         hoursCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .centeredHorizontally, animated: true)
     }
     
-    func getOnlyName(from name: String) -> String {
+    func getConditionAndImage(for currentWeatherResponse: WeatherResponse) -> (String, UIImage) {
+        let condition = currentWeatherResponse.fact.condition
+        var backgroundImage = UIImage()
+        switch condition {
+        case Condition.clear.rawValue:
+            backgroundImage = Asset.Assets.Weather.Images.clear.image
+        case Condition.cloudy.rawValue,
+            Condition.partlyCloudy.rawValue,
+            Condition.overcast.rawValue:
+            backgroundImage = Asset.Assets.Weather.Images.cloudy.image
+        case Condition.lightRain.rawValue,
+            Condition.rain.rawValue,
+            Condition.heavyRain.rawValue,
+            Condition.showers.rawValue:
+            backgroundImage = Asset.Assets.Weather.Images.rain.image
+        case Condition.wetSnow.rawValue,
+            Condition.lightSnow.rawValue,
+            Condition.snow.rawValue,
+            Condition.snowShowers.rawValue:
+            backgroundImage = Asset.Assets.Weather.Images.snow.image
+        case Condition.hail.rawValue,
+            Condition.thunderstorm.rawValue,
+            Condition.thumderstormWithRain.rawValue,
+            Condition.thunderstormWithHail.rawValue:
+            backgroundImage = Asset.Assets.Weather.Images.thunder.image
+        default:
+            backgroundImage = Asset.Assets.Weather.Images.clear.image
+        }
+        return (condition, backgroundImage)
+    }
+    
+    func getName(from currentWeatherResponse: WeatherResponse) -> String {
+        let name = currentWeatherResponse.geoObject.locality.name
         let separator = "округ "
         let stringComponents = name.components(separatedBy: separator)
         var onlyName = stringComponents[0]
@@ -207,24 +244,9 @@ extension MainViewController: MainViewControllerCollectionProtocol {
         return onlyName
     }
     
-    private enum CityName: String {
-        case moscow = "москва"
-        case saintPetersburg = "санкт-петербург"
-        case novosibirsk = "новосибирск"
-        case ekaterinburg = "екатеринбург"
-        case nizhniyNovgorod = "нижний новгород"
-        case samara = "самара"
-        case omsk = "омск"
-        case kazan = "казань"
-        case chelyabinsk = "челябинск"
-        case rostovOnDon = "ростов-на-дону"
-        case murmansk = "мурманск"
-    }
-    
-    func getImageFor(currentCity: WeatherResponse?, largeSize: Bool) -> UIImage {
-        guard let currentCity = currentCity else { return UIImage() }
-        let name = currentCity.geoObject.locality.name.lowercased()
-        let onlyName = getOnlyName(from: name)
+    func getImageFor(currentWeatherResponse: WeatherResponse?, largeSize: Bool) -> UIImage {
+        guard let currentWeatherResponse = currentWeatherResponse else { return UIImage() }
+        let onlyName = getName(from: currentWeatherResponse).lowercased()
         switch onlyName {
         case CityName.moscow.rawValue:
             return largeSize ? Asset.Assets.Cities.Large.moscow.image : Asset.Assets.Cities.Small.moscowSmall.image

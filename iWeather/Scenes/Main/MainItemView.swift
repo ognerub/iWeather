@@ -6,7 +6,10 @@ protocol MainItemProtocol: AnyObject {
         temp: String,
         info: String,
         condition: String,
-        image: UIImage)
+        image: UIImage,
+        backgroundImage: UIImage,
+        backgroundColor: UIColor
+    )
 }
 
 final class MainItemView: UIView, MainItemProtocol {
@@ -18,6 +21,12 @@ final class MainItemView: UIView, MainItemProtocol {
         view.backgroundColor = Asset.Colors.customLightPurple.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
+    }()
+    
+    private lazy var backgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
     
     private lazy var imageView: UIImageView = {
@@ -89,13 +98,17 @@ final class MainItemView: UIView, MainItemProtocol {
         temp: String,
         info: String,
         condition: String,
-        image: UIImage
+        image: UIImage,
+        backgroundImage: UIImage,
+        backgroundColor: UIColor
     ) {
         self.nameLabel.text = name
         self.tempLabel.text = temp
         self.infoLabel.text = info
         self.conditionLabel.text = condition
         self.imageView.image = image
+        self.backgroundImageView.image = backgroundImage
+        self.background.backgroundColor = backgroundColor
     }
     
     private func configureConstraints() {
@@ -105,6 +118,13 @@ final class MainItemView: UIView, MainItemProtocol {
             background.bottomAnchor.constraint(equalTo: bottomAnchor),
             background.leadingAnchor.constraint(equalTo: leadingAnchor),
             background.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+        background.addSubview(backgroundImageView)
+        NSLayoutConstraint.activate([
+            backgroundImageView.topAnchor.constraint(equalTo: background.topAnchor),
+            backgroundImageView.bottomAnchor.constraint(equalTo: background.bottomAnchor),
+            backgroundImageView.leadingAnchor.constraint(equalTo: background.leadingAnchor),
+            backgroundImageView.trailingAnchor.constraint(equalTo: background.trailingAnchor)
         ])
         background.addSubview(imageView)
         NSLayoutConstraint.activate([

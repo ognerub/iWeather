@@ -15,14 +15,14 @@ final class ForcastService {
     let searchArray: [String] = [
         NetworkConstants.standart.moscow,
         NetworkConstants.standart.saintPetersburg,
-//        NetworkConstants.standart.novosibirsk,
-//        NetworkConstants.standart.ekaterinburg,
-//        NetworkConstants.standart.nizhniyNovgorod,
-//        NetworkConstants.standart.samara,
-//        NetworkConstants.standart.omsk,
-//        NetworkConstants.standart.kazan,
-//        NetworkConstants.standart.chelyabinsk,
-//        NetworkConstants.standart.rostovOnDon,
+        NetworkConstants.standart.novosibirsk,
+        NetworkConstants.standart.ekaterinburg,
+        NetworkConstants.standart.nizhniyNovgorod,
+        NetworkConstants.standart.samara,
+        NetworkConstants.standart.omsk,
+        NetworkConstants.standart.kazan,
+        NetworkConstants.standart.chelyabinsk,
+        NetworkConstants.standart.rostovOnDon,
         NetworkConstants.standart.murmansk
     ]
     

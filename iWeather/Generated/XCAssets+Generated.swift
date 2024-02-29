@@ -78,6 +78,11 @@ internal enum Asset {
         internal static let dayRainy = ImageAsset(name: "Day_rainy")
         internal static let eveningClear = ImageAsset(name: "Evening_clear")
         internal static let nightClear = ImageAsset(name: "Night_clear")
+        internal static let clear = ImageAsset(name: "clear")
+        internal static let cloudy = ImageAsset(name: "cloudy")
+        internal static let rain = ImageAsset(name: "rain")
+        internal static let snow = ImageAsset(name: "snow")
+        internal static let thunder = ImageAsset(name: "thunder")
       }
     }
   }
