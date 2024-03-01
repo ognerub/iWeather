@@ -59,6 +59,7 @@ internal enum Asset {
     }
     internal static let iconsArrowDown = ImageAsset(name: "Icons_arrow_down")
     internal static let iconsArrowRight = ImageAsset(name: "Icons_arrow_right")
+    internal static let info = ImageAsset(name: "Info")
     internal enum TabBarItems {
       internal static let iconsMain = ImageAsset(name: "Icons_main")
       internal static let iconsMap = ImageAsset(name: "Icons_map")

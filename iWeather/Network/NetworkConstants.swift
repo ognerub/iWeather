@@ -2,6 +2,8 @@ import Foundation
 
 let token = "f49e4f1a-de08-4104-b3b7-0bceff802479"
 let base = "https://api.weather.yandex.ru"
+let imgBase = "https://yastatic.net/weather/i/icons/funky/dark/"
+let imgExt = ".svg"
 
 let moscowLatLon = "55.7522200;37.6155600"
 let saintPetersburgLatLon = "59.9386300;30.3141300"
@@ -17,8 +19,10 @@ let murmanskLatLon = "68.9791700;33.0925100"
 
 struct NetworkConstants {
     
-    let baseURL: String
     let personalToken: String
+    let baseURL: String
+    let imageBase: String
+    let imageExt: String
     let moscow: String
     let saintPetersburg: String
     let novosibirsk: String
@@ -32,8 +36,10 @@ struct NetworkConstants {
     let murmansk: String
     
     init(
-        baseURL: String,
         personalToken: String,
+        baseURL: String,
+        imageBase: String,
+        imageExt: String,
         moscow: String,
         saintPetersburg: String,
         novosibirsk: String,
@@ -46,8 +52,10 @@ struct NetworkConstants {
         rostovOnDon: String,
         murmansk: String
     ) {
-        self.baseURL = baseURL
         self.personalToken = personalToken
+        self.baseURL = baseURL
+        self.imageBase = imageBase
+        self.imageExt = imageExt
         self.moscow = moscow
         self.saintPetersburg = saintPetersburg
         self.novosibirsk = novosibirsk
@@ -63,8 +71,10 @@ struct NetworkConstants {
     
     static var standart: NetworkConstants {
         return NetworkConstants(
-            baseURL: base,
             personalToken: token,
+            baseURL: base,
+            imageBase: imgBase,
+            imageExt: imgExt,
             moscow: moscowLatLon,
             saintPetersburg: saintPetersburgLatLon,
             novosibirsk: novosibirskLatLon,

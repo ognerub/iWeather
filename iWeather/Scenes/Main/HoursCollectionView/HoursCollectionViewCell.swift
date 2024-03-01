@@ -13,6 +13,12 @@ final class HoursCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
+    var backgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     private lazy var tempLabel: UILabel = {
         let label = UILabel()
         label.adjustsFontSizeToFitWidth = true
@@ -50,6 +56,11 @@ final class HoursCollectionViewCell: UICollectionViewCell {
         self.hourLabel.text = hour
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        backgroundImageView.kf.cancelDownloadTask()
+    }
+    
     // MARK: - Configure constraints
     private func configureConstraints() {
         addSubview(background)
@@ -58,6 +69,13 @@ final class HoursCollectionViewCell: UICollectionViewCell {
             background.leadingAnchor.constraint(equalTo: leadingAnchor),
             background.trailingAnchor.constraint(equalTo: trailingAnchor),
             background.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40)
+        ])
+        background.addSubview(backgroundImageView)
+        NSLayoutConstraint.activate([
+            backgroundImageView.topAnchor.constraint(equalTo: background.topAnchor, constant: 10),
+            backgroundImageView.centerXAnchor.constraint(equalTo: background.centerXAnchor),
+            backgroundImageView.widthAnchor.constraint(equalToConstant: 30),
+            backgroundImageView.heightAnchor.constraint(equalToConstant: 30)
         ])
         background.addSubview(tempLabel)
         NSLayoutConstraint.activate([

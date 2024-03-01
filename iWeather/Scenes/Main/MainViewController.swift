@@ -6,7 +6,8 @@ protocol MainViewControllerCollectionProtocol: AnyObject {
     func updateUI(with: Int)
     func getName(from currentWeatherResponse: WeatherResponse) -> String
     func getImageFor(currentWeatherResponse: WeatherResponse?, largeSize: Bool) -> UIImage
-    func getConditionAndImage(for currentWeatherResponse: WeatherResponse) -> (String, UIImage)
+    func getConditionAndImage(for currentWeatherResponse: WeatherResponse) -> (String, UIColor)
+    func showContent(_ value: Bool)
 }
 
 final class MainViewController: UIViewController {
@@ -72,6 +73,7 @@ final class MainViewController: UIViewController {
         layout.scrollDirection = .horizontal
         let frame = CGRect(x: 0, y: 380, width: view.frame.width, height: 275)
         let collection = CitiesCollectionView(frame: frame, layout: layout)
+        collection.showsHorizontalScrollIndicator = false
         return collection
     }()
     
@@ -91,12 +93,34 @@ final class MainViewController: UIViewController {
         layout.scrollDirection = .horizontal
         let frame = CGRect(x: 0, y: 655, width: view.frame.width, height: 152)
         let collection = HoursCollectionView(frame: frame, layout: layout)
+        collection.showsHorizontalScrollIndicator = false
         return collection
     }()
+    
+    private var isContentLoaded: Bool?
+    private var lastContentCount: Int?
+    
+    private lazy var stubView: UIView = {
+        let stub = UIView()
+        stub.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        stub.backgroundColor = Asset.Colors.customPurple.color
+        return stub
+    }()
+    
+    private lazy var stubImageView: UIImageView = {
+        let image = Asset.Assets.info.image
+        let stub = UIImageView(image: image)
+        stub.frame = CGRect(x: view.frame.width/2 - 100, y: view.frame.height/2 - 100, width: 200, height: 200)
+        stub.backgroundColor = Asset.Colors.customPurple.color
+        return stub
+    }()
+    
+    
     
     // MARK: Lifecycle
     override func loadView() {
         super.loadView()
+        isContentLoaded = false
         propertiesSetup()
     }
     
@@ -104,11 +128,23 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Asset.Colors.customPurple.color
         navigationController?.isNavigationBarHidden = true
+        self.constraintsConfiguration()
         addObserverUsingNotificationCenter()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         presenter?.startFetchGroup()
+    }
+    
+    func showContent(_ value: Bool) {
+        guard let isContentLoaded = isContentLoaded else { return }
+        if value && !isContentLoaded {
+            stubImageView.removeFromSuperview()
+            stubView.removeFromSuperview()
+        } else {
+            view.addSubview(stubView)
+            stubView.addSubview(stubImageView)
+        }
     }
     
     private func propertiesSetup() {
@@ -117,6 +153,7 @@ final class MainViewController: UIViewController {
         presenter = MainPresenter()
         presenter?.uiBlockingProgressHUD = uiBlockingProgressHUD
         presenter?.alert = alertPresenter
+        presenter?.mainViewControllerDelegate = self
         citiesCollectionView.mainViewControllerDelegate = self
         hoursCollectionView.mainViewControllerDelegate = self
     }
@@ -134,16 +171,6 @@ final class MainViewController: UIViewController {
 
 // MARK: - Configuration
 private extension MainViewController {
-    func constraintsConfiguration() {
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
-        contentView.addSubview(mainItem)
-        mainItem.addSubview(profileButton)
-        mainItem.addSubview(burgerButton)
-        contentView.addSubview(citiesCollectionView)
-        contentView.addSubview(todayLabel)
-        contentView.addSubview(hoursCollectionView)
-    }
     
     func addObserverUsingNotificationCenter() {
         forcastServiceObserver = NotificationCenter.default.addObserver(
@@ -152,11 +179,27 @@ private extension MainViewController {
             queue: .main
         ) { [weak self] notification in
             guard let self = self else { return }
-            self.constraintsConfiguration()
-            self.scrollView.setContentOffset(CGPoint(x: 0, y: -44), animated: true)
             self.showArray = self.forcastService.fetchedArray
+            self.lastContentCount = self.showArray.count
             self.presenter?.uiBlockingProgressHUD?.dismissCustom()
             self.updateUI(with: 0)
+            self.scrollView.setContentOffset(CGPoint(x: 0, y: -44), animated: true)
+        }
+    }
+    
+    func constraintsConfiguration() {
+        if lastContentCount != showArray.count {
+            view.addSubview(scrollView)
+            scrollView.addSubview(contentView)
+            contentView.addSubview(mainItem)
+            mainItem.addSubview(profileButton)
+            mainItem.addSubview(burgerButton)
+            contentView.addSubview(citiesCollectionView)
+            contentView.addSubview(todayLabel)
+            contentView.addSubview(hoursCollectionView)
+            view.addSubview(stubView)
+        } else {
+            isContentLoaded = true
         }
     }
 }
@@ -175,19 +218,40 @@ extension MainViewController: MainViewControllerCollectionProtocol {
         let temp = String(currentWeatherResponse.fact.temp)
         let condition = getConditionAndImage(for: currentWeatherResponse)
         let conditionString = condition.0
-        let color = Asset.Colors.customLightPurple.color
-        let backgroundImage = condition.1
+        let color = condition.1
+        let date = currentWeatherResponse.nowDt.dateFromISO8601String()
+        let stringDate = date.formatted
+        let separator = " "
+        let stringComponents = stringDate.components(separatedBy: separator)
+        let dateComponent = stringComponents[0]
+        let mounthComponent = stringComponents[1].capitalized
+        let dayComponent = stringComponents [2].uppercased()
         
+        let dateString = dateComponent + separator + mounthComponent + separator + dayComponent
+        
+        let array = currentWeatherResponse.forecasts.flatMap {
+            return $0.hours
+        }
+        let tempArray: [Int] = array.compactMap {
+            return $0.temp
+        }
+        let minTemp = String(tempArray.min() ?? 0)
+        let maxTemp = String(tempArray.max() ?? 0)
+        let space = " "
+        let degrees = "°C"
+        let divider = "/"
+        let tempString = minTemp + degrees + divider + maxTemp + degrees
         mainItemDelegate?.configureItemWith(
             name: name,
-            temp: temp + "°C",
-            info: "20 Apr Wed 20°C/29°C",
+            temp: temp + degrees,
+            info: dateString + space + tempString,
             condition: conditionString,
             image: image,
-            backgroundImage: backgroundImage,
+            backgroundImage: UIImage(),
             backgroundColor: color
         )
         animatedAdd(of: mainItem)
+        downloadImageFor(imageView: mainItem.backgroundImageView, with: itemNumber)
         /// Cities collection view update
         let filteredArray = forcastService.fetchedArray.filter( { $0.geoObject.locality.name
             != showArray[itemNumber].geoObject.locality.name } )
@@ -202,35 +266,56 @@ extension MainViewController: MainViewControllerCollectionProtocol {
         hoursCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .centeredHorizontally, animated: true)
     }
     
-    func getConditionAndImage(for currentWeatherResponse: WeatherResponse) -> (String, UIImage) {
+    private func downloadImageFor(imageView: UIImageView, with number: Int) {
+        let icon = showArray[number].fact.icon
+        let string = NetworkConstants.standart.imageBase + icon + NetworkConstants.standart.imageExt
+        guard let url = URL(string: string)
+        else { return }
+        imageView.kf.indicatorType = .activity
+        imageView.kf.setImage(
+            with: url,
+            placeholder: UIImage(),
+            options: [
+                .processor(SVGImgProcessor())
+            ]
+        ) { result in
+            switch result {
+            case .success(_):
+                imageView.contentMode = .scaleAspectFill
+            case .failure(_):
+                imageView.image = UIImage(systemName: "nosign") ?? UIImage()
+            }
+            
+        }
+    }
+    
+    func getConditionAndImage(for currentWeatherResponse: WeatherResponse) -> (String, UIColor) {
         let condition = currentWeatherResponse.fact.condition
-        var backgroundImage = UIImage()
+        var color = UIColor()
         switch condition {
-        case Condition.clear.rawValue:
-            backgroundImage = Asset.Assets.Weather.Images.clear.image
         case Condition.cloudy.rawValue,
             Condition.partlyCloudy.rawValue,
             Condition.overcast.rawValue:
-            backgroundImage = Asset.Assets.Weather.Images.cloudy.image
+            color = UIColor.lightText
         case Condition.lightRain.rawValue,
             Condition.rain.rawValue,
             Condition.heavyRain.rawValue,
             Condition.showers.rawValue:
-            backgroundImage = Asset.Assets.Weather.Images.rain.image
+            color = UIColor.blue
         case Condition.wetSnow.rawValue,
             Condition.lightSnow.rawValue,
             Condition.snow.rawValue,
             Condition.snowShowers.rawValue:
-            backgroundImage = Asset.Assets.Weather.Images.snow.image
+            color = UIColor.lightGray
         case Condition.hail.rawValue,
             Condition.thunderstorm.rawValue,
             Condition.thumderstormWithRain.rawValue,
             Condition.thunderstormWithHail.rawValue:
-            backgroundImage = Asset.Assets.Weather.Images.thunder.image
+            color = UIColor.gray
         default:
-            backgroundImage = Asset.Assets.Weather.Images.clear.image
+            color = Asset.Colors.customLightPurple.color
         }
-        return (condition, backgroundImage)
+        return (condition, color)
     }
     
     func getName(from currentWeatherResponse: WeatherResponse) -> String {

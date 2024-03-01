@@ -68,7 +68,37 @@ extension HoursCollectionView: UICollectionViewDataSource {
         cell.configureCell(
             temp: temp,
             hour: hour)
+        downloadImageFor(cell: cell, at: indexPath)
         return cell
+    }
+    
+    private func downloadImageFor(cell: HoursCollectionViewCell, at indexPath: IndexPath) {
+        let hoursArray: [Hour] = mainViewControllerDelegate?.currentWeatherResponse?.forecasts.flatMap {
+            return $0.hours
+        } ?? []
+        let iconsArray: [String] = hoursArray.compactMap {
+            return $0.icon
+        }
+        let icon = iconsArray[indexPath.row]
+        let string = NetworkConstants.standart.imageBase + icon + NetworkConstants.standart.imageExt
+        guard let url = URL(string: string)
+        else { return }
+        cell.backgroundImageView.kf.indicatorType = .activity
+        cell.backgroundImageView.kf.setImage(
+            with: url,
+            placeholder: UIImage(),
+            options: [
+                .processor(SVGImgProcessor())
+            ]
+        ) { result in
+            switch result {
+            case .success(_):
+                cell.backgroundImageView.contentMode = .scaleAspectFill
+            case .failure(_):
+                cell.backgroundImageView.image = UIImage(systemName: "nosign") ?? UIImage()
+            }
+            
+        }
     }
     
     private func createLabels(using indexPath: IndexPath) -> (String, String) {

@@ -4,10 +4,11 @@ import UIKit
 protocol MainPresenterProtocol: AnyObject {
     var uiBlockingProgressHUD: UIBlockingProgressHUDProtocol? { get set }
     var alert: AlertPresenterProtocol? { get set }
-    func startFetchGroup()
 }
 
 final class MainPresenter: MainPresenterProtocol {
+    
+    weak var mainViewControllerDelegate: MainViewControllerCollectionProtocol?
     
     private let forcastService = ForcastService.shared
     private var forcastServiceObserver: NSObjectProtocol?
@@ -23,8 +24,9 @@ final class MainPresenter: MainPresenterProtocol {
             guard let self = self else { return }
             switch result {
             case .success(_):
-                return
+                self.mainViewControllerDelegate?.showContent(true)
             case .failure:
+                self.mainViewControllerDelegate?.showContent(false)
                 let model = self.createAlertModel {
                     self.startFetchGroup()
                     self.alertShown = false

@@ -23,7 +23,7 @@ final class MainItemView: UIView, MainItemProtocol {
         return view
     }()
     
-    private lazy var backgroundImageView: UIImageView = {
+    var backgroundImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -121,10 +121,11 @@ final class MainItemView: UIView, MainItemProtocol {
         ])
         background.addSubview(backgroundImageView)
         NSLayoutConstraint.activate([
-            backgroundImageView.topAnchor.constraint(equalTo: background.topAnchor),
-            backgroundImageView.bottomAnchor.constraint(equalTo: background.bottomAnchor),
-            backgroundImageView.leadingAnchor.constraint(equalTo: background.leadingAnchor),
-            backgroundImageView.trailingAnchor.constraint(equalTo: background.trailingAnchor)
+            backgroundImageView.topAnchor.constraint(equalTo: background.topAnchor, constant: 30),
+            backgroundImageView.centerXAnchor.constraint(equalTo: background.centerXAnchor),
+            backgroundImageView.widthAnchor.constraint(equalToConstant: 120),
+            backgroundImageView.heightAnchor.constraint(equalToConstant: 120)
+            
         ])
         background.addSubview(imageView)
         NSLayoutConstraint.activate([

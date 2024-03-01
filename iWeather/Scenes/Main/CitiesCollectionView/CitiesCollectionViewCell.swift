@@ -13,7 +13,14 @@ final class CitiesCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    private lazy var backgroundImageView: UIImageView = {
+    var backgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    var phenomImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -58,6 +65,11 @@ final class CitiesCollectionViewCell: UICollectionViewCell {
         self.backgroundImageView.image = backgroundImage
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        backgroundImageView.kf.cancelDownloadTask()
+    }
+    
     // MARK: - Configure constraints
     private func configureConstraints() {
         addSubview(background)
@@ -69,10 +81,17 @@ final class CitiesCollectionViewCell: UICollectionViewCell {
         ])
         background.addSubview(backgroundImageView)
         NSLayoutConstraint.activate([
-            backgroundImageView.topAnchor.constraint(equalTo: background.topAnchor),
-            backgroundImageView.bottomAnchor.constraint(equalTo: background.bottomAnchor),
-            backgroundImageView.leadingAnchor.constraint(equalTo: background.leadingAnchor),
-            backgroundImageView.trailingAnchor.constraint(equalTo: background.trailingAnchor)
+            backgroundImageView.topAnchor.constraint(equalTo: background.topAnchor, constant: 30),
+            backgroundImageView.centerXAnchor.constraint(equalTo: background.centerXAnchor),
+            backgroundImageView.widthAnchor.constraint(equalToConstant: 60),
+            backgroundImageView.heightAnchor.constraint(equalToConstant: 60)
+        ])
+        background.addSubview(phenomImageView)
+        NSLayoutConstraint.activate([
+            phenomImageView.topAnchor.constraint(equalTo: background.topAnchor, constant: 30),
+            phenomImageView.centerXAnchor.constraint(equalTo: background.centerXAnchor),
+            phenomImageView.widthAnchor.constraint(equalToConstant: 60),
+            phenomImageView.heightAnchor.constraint(equalToConstant: 60)
         ])
         background.addSubview(imageView)
         NSLayoutConstraint.activate([

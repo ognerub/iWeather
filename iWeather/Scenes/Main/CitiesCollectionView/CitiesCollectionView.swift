@@ -1,4 +1,5 @@
 import UIKit
+import Kingfisher
 
 final class CitiesCollectionView: UICollectionView {
     
@@ -61,14 +62,39 @@ extension CitiesCollectionView: UICollectionViewDataSource {
         let temp = String(currentWeatherResponse.fact.temp)
         let name: String = delegate.getName(from: currentWeatherResponse)
         let image = delegate.getImageFor(currentWeatherResponse: currentWeatherResponse, largeSize: false)
-        let color = Asset.Colors.customLightPurple.color
-        let backgroundImage = delegate.getConditionAndImage(for: currentWeatherResponse).1
+        let color = delegate.getConditionAndImage(for: currentWeatherResponse).1
         cell.configureCell(
             nameLabel: name + " " + temp + "°C",
             image: image,
             backgroundColor: color,
-            backgroundImage: backgroundImage
+            backgroundImage: UIImage()
         )
+        let icon = currentWeatherResponse.fact.icon
+        downloadImageFor(imageView: cell.backgroundImageView, at: indexPath, icon: icon)
+        guard let phenomIcon = currentWeatherResponse.fact.phenomIcon else { return cell }
+        downloadImageFor(imageView: cell.phenomImageView, at: indexPath, icon: phenomIcon)
         return cell
+    }
+    
+    private func downloadImageFor(imageView: UIImageView, at indexPath: IndexPath, icon: String) {
+        let string = NetworkConstants.standart.imageBase + icon + NetworkConstants.standart.imageExt
+        guard let url = URL(string: string)
+        else { return }
+        imageView.kf.indicatorType = .activity
+        imageView.kf.setImage(
+            with: url,
+            placeholder: UIImage(),
+            options: [
+                .processor(SVGImgProcessor())
+            ]
+        ) { result in
+            switch result {
+            case .success(_):
+                imageView.contentMode = .scaleAspectFill
+            case .failure(_):
+                imageView.image = UIImage(systemName: "nosign") ?? UIImage()
+            }
+            
+        }
     }
 }

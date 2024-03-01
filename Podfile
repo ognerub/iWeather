@@ -8,5 +8,7 @@ target 'iWeather' do
   # Pods for iWeather
 
 pod 'SwiftGen'
+pod 'Kingfisher'
+pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '3.x'
 
 end
