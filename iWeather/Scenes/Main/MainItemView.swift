@@ -121,10 +121,10 @@ final class MainItemView: UIView, MainItemProtocol {
         ])
         background.addSubview(backgroundImageView)
         NSLayoutConstraint.activate([
-            backgroundImageView.topAnchor.constraint(equalTo: background.topAnchor, constant: 30),
+            backgroundImageView.topAnchor.constraint(equalTo: background.topAnchor, constant: 60),
             backgroundImageView.centerXAnchor.constraint(equalTo: background.centerXAnchor),
-            backgroundImageView.widthAnchor.constraint(equalToConstant: 120),
-            backgroundImageView.heightAnchor.constraint(equalToConstant: 120)
+            backgroundImageView.widthAnchor.constraint(equalToConstant: 60),
+            backgroundImageView.heightAnchor.constraint(equalToConstant: 60)
             
         ])
         background.addSubview(imageView)

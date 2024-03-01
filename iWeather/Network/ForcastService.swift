@@ -37,6 +37,7 @@ final class ForcastService {
     }
     
     func fetch(searchArray: [String], completion: @escaping (Result<[WeatherResponse], Error>) -> Void) {
+        self.fetchedArray = []
         let group = DispatchGroup()
         for searchText in searchArray {
             group.enter()

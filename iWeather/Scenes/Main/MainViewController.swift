@@ -110,7 +110,7 @@ final class MainViewController: UIViewController {
     private lazy var stubImageView: UIImageView = {
         let image = Asset.Assets.info.image
         let stub = UIImageView(image: image)
-        stub.frame = CGRect(x: view.frame.width/2 - 100, y: view.frame.height/2 - 100, width: 200, height: 200)
+        stub.frame = CGRect(x: view.frame.width/2 - 100, y: view.frame.height/2 - 300, width: 200, height: 200)
         stub.backgroundColor = Asset.Colors.customPurple.color
         return stub
     }()
@@ -160,12 +160,22 @@ final class MainViewController: UIViewController {
     
     @objc
     private func didTapProfile() {
-        print("profileButton")
+        let popup = SearchViewController()
+        if #available(iOS 15.0, *) {
+            if let presentationController = popup.presentationController as? UISheetPresentationController {
+                presentationController.detents = [.medium()]
+            }
+        } else {
+            // TODO: make it works with earlier versions of iOS
+        }
+        self.present(popup, animated: true)
     }
     
     @objc
     private func didTapBurger() {
-        print("profileBurger")
+        let popup = MapViewController()
+        navigationController?.modalPresentationStyle = .popover
+        self.present(popup, animated: true)
     }
 }
 
